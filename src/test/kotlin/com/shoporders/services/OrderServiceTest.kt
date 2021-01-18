@@ -10,10 +10,10 @@ class OrderServiceTest(val orderService: OrderService) : StringSpec({
 
     "test List" {
         val order = Order(
-            listOf(Item("Apple"), Item("Apple"), Item("Orange"), Item("Apple"))
+            listOf(Item("Apple", 3), Item("Orange", 1))
         )
 
-        assert(orderService.calcTotal(order) == 205L)
+        assert(orderService.calcTotal(order) == 145L)
     }
 
 

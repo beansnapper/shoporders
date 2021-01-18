@@ -8,11 +8,11 @@ import javax.inject.Singleton
 class OrderService {
 
     @Inject
-    lateinit var costService : CostService
+    lateinit var costService: CostService
 
-    fun calcTotal(order: Order) : Long {
+    fun calcTotal(order: Order): Long {
         return order.items.map {
-            costService.priceFor(it.name)
+            costService.priceOf(order)
         }.sum()
     }
 
