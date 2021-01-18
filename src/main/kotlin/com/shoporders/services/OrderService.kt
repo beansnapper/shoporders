@@ -11,9 +11,7 @@ class OrderService {
     lateinit var costService: CostService
 
     fun calcTotal(order: Order): Long {
-        return order.items.map {
-            costService.priceOf(order)
-        }.sum()
+        return costService.priceOf(order)
     }
 
 }

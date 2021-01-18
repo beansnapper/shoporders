@@ -12,7 +12,10 @@ class OrderServiceTest(val orderService: OrderService) : StringSpec({
         val order = Order(
             listOf(Item("Apple", 3), Item("Orange", 1))
         )
+        
 
+        val total = orderService.calcTotal(order)
+        print("total = $total")
         assert(orderService.calcTotal(order) == 145L)
     }
 
