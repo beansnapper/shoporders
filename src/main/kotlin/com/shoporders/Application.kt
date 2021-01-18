@@ -1,4 +1,4 @@
-package com.example
+package com.shoporders
 
 import io.micronaut.runtime.Micronaut.*
 fun main(args: Array<String>) {

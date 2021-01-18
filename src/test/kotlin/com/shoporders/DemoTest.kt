@@ -1,4 +1,4 @@
-package com.example
+package com.shoporders
 import io.micronaut.runtime.EmbeddedApplication
 import io.micronaut.test.extensions.kotest.annotation.MicronautTest
 import io.kotest.core.spec.style.StringSpec
