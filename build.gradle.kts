@@ -9,7 +9,7 @@ plugins {
 version = "0.1"
 group = "com.example"
 
-val kotlinVersion=project.properties.get("kotlinVersion")
+val kotlinVersion = project.properties.get("kotlinVersion")
 repositories {
     mavenCentral()
     jcenter()
@@ -20,7 +20,7 @@ micronaut {
     testRuntime("kotest")
     processing {
         incremental(true)
-        annotations("com.example.*")
+        annotations("com.shoporders.*")
     }
 }
 
@@ -34,6 +34,11 @@ dependencies {
     implementation("io.micronaut:micronaut-http-client")
     runtimeOnly("ch.qos.logback:logback-classic")
     runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
+
+    kaptTest("io.micronaut:micronaut-inject-java")
+    testImplementation("io.micronaut.test:micronaut-test-kotest:2.3.2")
+    testImplementation("io.mockk:mockk:1.10.4")
+    testImplementation("io.kotest:kotest-runner-junit5-jvm:4.3.0")
 }
 
 
