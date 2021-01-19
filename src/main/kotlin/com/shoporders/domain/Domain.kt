@@ -5,6 +5,14 @@ data class Item(
     val qty: Long,
 )
 
+enum class Status {
+    SUCCESS,
+    FAILURE,
+    NOT_SUBMITTED
+}
+
 data class Order(
     val items: List<Item>,
+    val subtotal: Long = 0,
+    val status: Status = Status.NOT_SUBMITTED,
 )
