@@ -1,5 +1,6 @@
 package com.shoporders.services
 
+import com.shoporders.OrderException
 import com.shoporders.domain.Order
 import com.shoporders.domain.Status
 import javax.inject.Inject
@@ -14,10 +15,23 @@ class OrderService {
     @Inject
     lateinit var notificationService: NotificationService
 
+    @Inject
+    lateinit var inventoryService: InventoryService
+
     fun submit(order: Order): Order {
-        val completedOrder = order.copy(status = Status.SUCCESS, subtotal = costService.priceOf(order))
-        notificationService.notify(completedOrder)
-        return completedOrder
+        try {
+            inventoryService.provision(order)
+            val completedOrder = order.copy(status = Status.SUCCESS, subtotal = costService.priceOf(order))
+            notificationService.notify(completedOrder)
+            return completedOrder
+        } catch (e: OrderException) {
+            val failedOrder = order.copy(
+                status = Status.FAILURE,
+                reason = e.message ?: "Unknown reason"
+            )
+            notificationService.notify(failedOrder)
+            return failedOrder
+        }
     }
 
 }
