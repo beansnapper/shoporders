@@ -22,16 +22,16 @@ class InventoryService {
         mutex.lock()
         try {
             // verify quantities
-            order.items.forEach { item ->
-                val qty = map[item.name] ?: throw OrderException("No ${item.name} available")
-                if (item.qty > qty) {
-                    throw OrderException("Only $qty ${item.name}(s) available")
+            order.items.forEach { lineItem ->
+                val qty = map[lineItem.item.name] ?: throw OrderException("No ${lineItem.item.name} available")
+                if (lineItem.qty > qty) {
+                    throw OrderException("Only $qty ${lineItem.item.name}(s) available")
                 }
             }
 
             // commit
-            order.items.forEach { item ->
-                map[item.name] = map[item.name]!! - item.qty
+            order.items.forEach { lineItem ->
+                map[lineItem.item.name] = map[lineItem.item.name]!! - lineItem.qty
             }
 
 

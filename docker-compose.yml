@@ -1,0 +1,11 @@
+version: "latest"
+services:
+mongodb:
+image : mongo
+container_name: mongodb
+volumes:
+- /home/kurtg/mongodb/database:/data/db
+ports:
+- 27017:27017
+restart: unless-stopped
+

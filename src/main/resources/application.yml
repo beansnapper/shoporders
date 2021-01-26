@@ -1,3 +1,10 @@
 micronaut:
   application:
-    name: demo
+    name: ShopOrder
+mongodb:
+  uri: mongodb://localhost:27017/
+  database: diaspora
+  cluster:
+    maxWaitQueueSize: 5
+  connectionPool:
+    maxSize: 20

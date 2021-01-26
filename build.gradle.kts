@@ -32,6 +32,8 @@ dependencies {
     implementation("io.micronaut:micronaut-runtime")
     implementation("javax.annotation:javax.annotation-api")
     implementation("io.micronaut:micronaut-http-client")
+    implementation("io.micronaut.mongodb:micronaut-mongo-sync")
+    implementation("io.github.microutils:kotlin-logging:1.7.8")
     runtimeOnly("ch.qos.logback:logback-classic")
     runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
 

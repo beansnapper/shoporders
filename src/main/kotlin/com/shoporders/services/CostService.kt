@@ -1,7 +1,7 @@
 package com.shoporders.services
 
 import com.shoporders.OrderException
-import com.shoporders.domain.Item
+
 import com.shoporders.domain.Order
 import javax.inject.Singleton
 
@@ -29,14 +29,14 @@ class CostService {
         mapOf("Apple" to Promotion(2, 1), "Orange" to Promotion(3, 2))
 
     fun priceOf(order: Order): Long {
-        return order.items.map { priceOf(it) }.sum()
+        return order.items.map { item -> priceOf(item) }.sum()
     }
 
-    fun priceOf(item: Item): Long {
-        val unitCost = map[item.name] ?: throw OrderException("Unknown Item")
-        return when (val promotion = promotions[item.name]) {
-            null -> standard.invoke(unitCost, item.qty)
-            else -> promotion.apply(unitCost, item.qty)
+    fun priceOf(lineItem: Order.LineItem): Long {
+        val unitCost = map[lineItem.item.name] ?: throw OrderException("Unknown Item")
+        return when (val promotion = promotions[lineItem.item.name]) {
+            null -> standard.invoke(unitCost, lineItem.qty)
+            else -> promotion.apply(unitCost, lineItem.qty)
         }
     }
 
